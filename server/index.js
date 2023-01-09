@@ -3,8 +3,12 @@ import bodyParser from "body-parser";
 import mongoose from 'mongoose';
 import cors from 'cors';
 import postRoutes from "./routes/posts.js";
+import dotenv from 'dotenv';
 
-const port = 5000;
+dotenv.config();
+
+const PORT = process.env.PORT;
+const CONNECTION_URL = process.env.CONNECTION_URL; 
 const app = express();
 
 app.use(bodyParser.json({ limit: '300mb'}));
@@ -14,10 +18,9 @@ app.use(cors());
 //routes 
 app.use('/posts',postRoutes);
 
-const connection_url = 'mongodb+srv://ikroopsingh:123@cluster0.nh2tqlf.mongodb.net/weconnect?retryWrites=true&w=majority'; 
-mongoose.connect(connection_url).then(() => {
-  app.listen(port, () => {
-    console.log(`listening at http://localhost:${port}`);
+mongoose.connect(CONNECTION_URL).then(() => {
+  app.listen(PORT, () => {
+    console.log(`listening at http://localhost:${PORT}`);
   })
 }).catch((err) => {
   console.log(err.message)
