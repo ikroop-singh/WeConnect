@@ -1,15 +1,7 @@
 const customStyles={
     media: {
-      height: 0,
+      height: '100px',
       paddingTop: '56.25%',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      backgroundBlendMode: 'darken',
-    },
-    border: {
-      border: 'solid',
-    },
-    fullHeightCard: {
-      height: '100%',
     },
     card: {
       display: 'flex',
@@ -18,17 +10,29 @@ const customStyles={
       borderRadius: '15px',
       height: '100%',
       position: 'relative',
+      marginBottom:'40px'
     },
-    overlay: {
-      position: 'absolute',
-      top: '20px',
-      left: '20px',
-      color: 'white',
+    cardContent:{
+          padding:'15px 0 3px 16px'
+    },
+
+    cardActions: {
+      padding: '20px 16px 0px 16px',
+      display: 'flex',
+      justifyContent: 'inherit',
+
+    },
+
+    userName: {
+      padding: '5px 0px 0px 9px',
+      fontSize: '23px',
+      color: 'black',
+      textDecoration:'none'
     },
     overlay2: {
       position: 'absolute',
-      top: '20px',
-      right: '20px',
+      top: '6px',
+      right: '6px',
       color: 'white',
     },
     grid: {
@@ -39,14 +43,35 @@ const customStyles={
       justifyContent: 'space-between',
       margin: '20px',
     },
-    title: {
-      padding: '0px 16px',
+    
+    comment:{
+      // bottom:'12px',
     },
-    cardActions: {
-      padding: '0 16px 8px 16px',
-      display: 'flex',
-      justifyContent: 'space-between',
+    timeStamp:{
+      position: 'absolute',
+      left: '59px',
+      top: '36px',
+  },
+    
+    commentsContent:{
+        paddingLeft:'10px'
     },
+    commentProfile:{
+      padding:'10px 0'
+    },
+    userProfile:{
+      margin: '10px 0',
+    },
+    head:{
+      display:'flex',
+      marginLeft:'8px'
+    },
+    commentsAction:{
+      height:'17px ',
+      padding:'2px 2px ',
+      cursor:'pointer',
+    }
+   
   };
 
   export default customStyles;

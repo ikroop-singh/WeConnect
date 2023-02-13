@@ -4,6 +4,9 @@ export const customStyles={
       margin: '10px',
 
   },
+  container:{
+     width:'30%'
+  },
   paper: {
     padding: '16px',
   },
@@ -13,7 +16,7 @@ export const customStyles={
     justifyContent: 'center',
   },
   fileInput: {
-    width: '97%',
+    // width: '97%',
     margin: '10px 0',
   },
   buttonSubmit: {

@@ -1,14 +1,14 @@
  const customStyles={
     mainContainer: {
-      display: 'flex',
-      alignItems: 'center',
-    },
+       marginRight:'10px'
+        },
     smMargin: {
       margin: '12px'
     },
     actionDiv: {
       textAlign: 'center',
     },
+    
   };
   export default customStyles;
   

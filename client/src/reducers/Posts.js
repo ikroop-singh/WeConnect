@@ -3,10 +3,14 @@
     switch (action.type){
         case 'FETCH_ALL':
             return action.payload;
+        case 'FETCH_ALL_SEARCH':
+            return action.payload;
         case 'CREATE':
             return [...posts,action.payload];
         case 'UPDATE':
         case 'LIKEPOST':
+        case 'COMMENTPOST':
+        case 'DELETECOMMENT':
             return posts.map((post)=>post._id===action.payload._id ? action.payload : post);
         case 'DELETE':
             return posts.filter((post)=>post._id !== action.payload);
