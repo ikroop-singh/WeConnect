@@ -11,7 +11,6 @@ export const signin = (formData, navigate,setLoading) => async (dispatch) => {
     navigate('/');
   } catch (error) {
     setLoading(false);
-    console.log(error.response)
     dispatch({type:'SET_ALERT',payload:{msg:error.response.data.message,severity:'error',open:true}})
 
   }

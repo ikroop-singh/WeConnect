@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
 import postMessage from '../models/postMessage.js';
 import cloudinary from 'cloudinary';
+import dotenv from 'dotenv';
+dotenv.config();
 
 cloudinary.config({
-    cloud_name: "dvzjddjbu",
-    api_key: "164298667117283",
-    api_secret: "y9rywNr6Rf7ia_8f9torYKd2VLw"
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
   });
   
 
@@ -94,7 +96,7 @@ export const updatePost = async (req,res) => {
 
 export const deletePost=async(req,res)=>{
       const {id}=req.params;
-    
+   
     
     try{ 
           const post=await postMessage.findById(id);

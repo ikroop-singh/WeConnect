@@ -1,4 +1,4 @@
-const alert=(data={msg:'',severity:'',open:false},action)=>{
+const alert=(data={msg:'',severity:'error',open:false},action)=>{
 switch (action.type) {
     case 'SET_ALERT':
         return {...data,severity:action.payload.severity,msg:action.payload.msg,open:action.payload.open}

@@ -56,7 +56,7 @@ const Auth = () => {
           const formData = new FormData();
           formData.append("file", selectedImage);
           formData.append("upload_preset", "v-connect");
-          formData.append("cloud_name", "dvzjddjbu");
+          formData.append("cloud_name", `${process.env.REACT_APP_CLOUD_NAME}`);
           axios.post("https://api.cloudinary.com/v1_1/dvzjddjbu/image/upload", formData)
             .then((res) => setImage({ ...image, url: res.data.url, imageId: res.data.public_id }))
         }

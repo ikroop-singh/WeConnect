@@ -32,7 +32,6 @@ const Post = ({ post, setCurrentId }) => {
 
   const handleDelete = () => {
     dispatch(deletePost(post._id));
-    console.log();
     setOpen(false);
   }
   const handleClose = () => {
