@@ -9,7 +9,7 @@ export const signin = async (req, res) => {
 
       const userExists = await users.findOne({ email });
       if (!userExists) {
-         return res.status(404).send({ message: "user doen't exists" });
+         return res.status(404).send({ message: "user doesn't exists" });
       }
 
       const passwordComapre = await bcrypt.compare(password, userExists.password);
@@ -17,7 +17,7 @@ export const signin = async (req, res) => {
          return res.status(400).send({ message: "Invalid credentials" });
       }
 
-      const token = jwt.sign({ email: userExists.email, id: userExists._id }, 'itsasecrete', { expiresIn: '1h' });
+      const token = jwt.sign({ email: userExists.email, id: userExists._id }, 'itsasecrete');
       res.status(200).send({ result: userExists, token });
    }
    catch (error) {
@@ -26,7 +26,7 @@ export const signin = async (req, res) => {
 }
 
 export const signup = async (req, res) => {
-   const { email, password, confirmPassword, firstName, lastName ,profilePic} = req.body;
+   const { email, password, confirmPassword, firstName, lastName ,profilePic,location} = req.body;
   
    try {
       const userExists = await users.findOne({ email });
@@ -39,8 +39,8 @@ export const signup = async (req, res) => {
       }
       
       const hashedPassword = await bcrypt.hash(password, 12);
-      const result = await users.create({ email, password: hashedPassword,profilePic, name: `${firstName} ${lastName}` });
-      const token = jwt.sign({ email: result.email, id: result._id }, 'itsasecrete', { expiresIn: '1h' });
+      const result = await users.create({ email, password: hashedPassword,profilePic,location, name: `${firstName} ${lastName}` });
+      const token = jwt.sign({ email: result.email, id: result._id }, 'itsasecrete' );
       res.status(200).send({ result, token });
    }
 

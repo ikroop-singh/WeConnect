@@ -1,22 +1,33 @@
 export const customStyles = {
     appBar: {
 
-        borderRadius: 4,
-        margin: '30px 0',
+        borderRadius: '15px',
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent:'space-between',
-        padding:'10px 50px'
+        paddingY:'10px',
+        paddingX:{lg:'50px',md:'30px',sm:'13px',xs:'10px'},
+        width:'96.2%',
     },
-    heading: {
-        color: 'rgba(0,183,255, 1)',
-        textDecoration:'none'
+    container:{
+        position:'fixed',
+        zIndex:'122',
+        paddingLeft:'0',
+    },
+    
+    heading: {    
+        color: '#1976d2',
+        textDecoration:'none',
+        fontFamily: "'Aclonica', sans-serif",
+        fontSize:{lg:'3rem',md:'2.7rem',sm:'1.8rem',xs:'1.6rem'}
     },
     image: {
         marginLeft: '15px',
     },
-    container:{
+    appbarInfo:{
         display:'flex',
         alignItems:'center',
     },
@@ -41,7 +52,15 @@ export const customStyles = {
         justifyContent: 'space-around',
         '@media(min-width:899px)':{
             display:'none'
-        }
+        },
+        zIndex:'2',
+    },
+    button:{
+        '@media(max-width:800px)':{
+
+            padding:'0',
+            fontSize:'10px'
+        }, 
     }
     
 }

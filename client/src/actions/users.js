@@ -1,32 +1,22 @@
 import * as api from '../api';
 
-export const fetchUser = (id) => async (dispatch) => {
+export const fetchUsers=()=>async(dispatch)=>{
     try {
-        const { data } = await api.fetchUser(id);
-        dispatch({ type: 'FETCH_USER', payload: data });
-
-    } catch (err) {
-        console.log(err);
+        const {data} = await api.fetchUsers();
+        dispatch({type:'FETCH_USERS',payload:data})
+        
+    } catch (error) {
+        console.log(error);
     }
 }
 
-export const followUser = (followId) => async (dispatch) => {
+export const searchUsers=(search)=>async(dispatch)=>{
     try {
-        const { data } = await api.followUser(followId);
-        dispatch({ type: 'UPDATE', payload: data });
-
-    } catch (err) {
-        console.log(err);
+        dispatch({type:'START_LOADING'});
+        const {data}=await api.searchUsers(search);
+        dispatch({type:'END_LOADING'});
+        dispatch({type:'SEARCH_USERS',payload:data});
+    } catch (error) {
+        console.log(error);
     }
 }
-
-export const unfollowUser = (unfollowId) => async (dispatch) => {
-    try {
-        const { data } = await api.unfollowUser(unfollowId);
-        dispatch({ type: 'UPDATE', payload: data });
-
-    } catch (err) {
-        console.log(err);
-    }
-}
-

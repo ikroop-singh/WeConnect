@@ -14,6 +14,7 @@ export const getPosts = async (req, res) => {
         postMessage.find()
         .populate('comments.postedBy','_id name profilePic')
         .populate('creator','_id name profilePic')
+        .sort({createdAt:-1})
         .exec((err,result)=>{
             if(err){
                 console.log(err)

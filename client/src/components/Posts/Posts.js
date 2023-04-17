@@ -7,7 +7,6 @@ import styles from './styles'
 const Posts = ({setCurrentId}) => {
   
   const posts=useSelector((state)=>state.posts);
-  console.log(posts);
 
   return (
     

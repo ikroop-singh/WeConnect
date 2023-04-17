@@ -36,7 +36,6 @@ const BottomNavbar = () => {
                    component={Link} to={'/profile/'+user?.result?._id}
                 />
                 
-
             </BottomNavigation>
         </Paper>
         </>

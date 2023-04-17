@@ -12,6 +12,9 @@ const userSchema=mongoose.Schema({
         imageId:{type:String},
        
     },
+    location:{
+        type:String
+    },
     followers:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'

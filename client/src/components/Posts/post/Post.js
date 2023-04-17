@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, CardActions, CardContent, CardMedia, Button, Typography, TextField, InputAdornment, IconButton } from '@mui/material';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, TextField, InputAdornment, IconButton, Box } from '@mui/material';
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 // import deleteIcon from '@mui/icons-material/DeleteIcon';
@@ -10,7 +10,7 @@ import moment from 'moment'
 import styles from './styles'
 import { useDispatch } from 'react-redux';
 import { deletePost, likePost, commentPost, deleteComment } from '../../../actions/Posts';
-import { useNavigate ,Link} from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Menu, MenuItem, Avatar } from '@mui/material';
 
 
@@ -78,7 +78,7 @@ const Post = ({ post, setCurrentId }) => {
     <Card sx={styles.card} elevation={5}>
       <div style={styles.head}>
         <Avatar sx={styles.userProfile} src={post.creator.profilePic.url} />
-        <Typography sx={styles.userName} variant='h6' component={Link} to={'/profile/'+post.creator._id}>{post.name}</Typography>
+        <Typography sx={styles.userName} variant='h6' component={Link} to={'/profile/' + post.creator._id}>{post.name}</Typography>
         <Typography sx={styles.timeStamp} variant='caption'>{moment(post.createdAt).fromNow()}</Typography>
       </div>
       <CardMedia sx={styles.media} image={post.image.url} component='div' />
@@ -118,17 +118,19 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
         <Typography variant='h6' gutterBottom>{post.title}</Typography>
 
+
+
         {
           post.comments.map((result) => {
 
             return <div style={{ display: 'flex', marginBottom: '8px' }} key={result._id}>
               <div style={styles.commentProfile}>
-                <Avatar src={result.postedBy.profilePic.url} sx={{ height: '30px', width: '30px' }} />
+                <Avatar src={result.postedBy.profilePic.url} component={Link} to={'/profile/' + result.postedBy._id} sx={{ height: '30px', width: '30px' }} />
               </div>
               <div style={styles.commentsContent}>
                 <div style={{ display: 'flex' }}>
 
-                  <Typography sx={{ fontWeight: 'bold' }} > {result.postedBy.name}</Typography>
+                  <Typography component={Link} to={'/profile/' + result.postedBy._id} sx={styles.postedBy}  > {result.postedBy.name}</Typography>
                   {
                     (user?.result?._id === result.postedBy._id) &&
                     (

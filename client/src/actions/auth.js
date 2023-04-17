@@ -10,19 +10,22 @@ export const signin = (formData, navigate,setLoading) => async (dispatch) => {
     dispatch({ type: 'AUTH', payload: data });
     navigate('/');
   } catch (error) {
-    console.log(error);
+    setLoading(false);
+    console.log(error.response)
+    dispatch({type:'SET_ALERT',payload:{msg:error.response.data.message,severity:'error',open:true}})
+
   }
 }
 
 export const signup = (formData,navigate,setLoading) => async (dispatch) => {
   //code for signup
   try {
-    console.log(formData)
-    const { data } =await  api.signup(formData);
+    const { data } =await api.signup(formData);
     setLoading(false);
     dispatch({ type: 'AUTH', payload: data });
     navigate('/');
   } catch (error) {
-    console.log(error);
+    setLoading(false);
+    dispatch({type:'SET_ALERT',payload:{msg:error.response.data.message,severity:'error',open:true}})
   }
 }

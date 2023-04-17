@@ -1,63 +1,85 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Paper, Typography, TextField, Button, Container } from '@mui/material';
 import { customStyles } from './style';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/Posts'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import LoadingButton from '@mui/lab/LoadingButton';
+import Alert from '../miscellaneous/Alert'
+
 
 const Form = ({ currentId, setCurrentId }) => {
-  const navigate=useNavigate();
+  const [loading, setLoading] = useState(false);
+  const ref = useRef();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
-  
+
   const user = JSON.parse(localStorage.getItem('profile'));
-  const [image,setImage]=useState({
-    url:'',
-    imageId:'',
+  const [image, setImage] = useState({
+    url: '',
+    imageId: '',
   });
-  const [selectedImage,setSelectedImage]= useState('');
+  const [selectedImage, setSelectedImage] = useState('');
 
   const [postData, setPostData] = useState({
     title: '',
-    tags:[] ,
-    
+    tags: [],
+
   });
-  
+
   useEffect(() => {
     if (post)
-    setPostData(post);
+      setPostData(post);
 
-    if(image.url)
-    {
-      if(!currentId){
+    if (image.url) {
+      if (!currentId) {
 
-        dispatch(createPost({ ...postData, name: user.result.name ,image}));
-        
+        dispatch(createPost({ ...postData, name: user.result.name, image }, setLoading));
+
         navigate('/');
       }
 
-        }
-        // eslint-disable-next-line
-  }, [post,image.url])
-  
-  
-  const addPost = async(e) => {
-    e.preventDefault();
-    //for uploading image in cloudinary
-    const formData=new FormData();
-    formData.append("file",selectedImage);
-    formData.append("upload_preset","v-connect");
-    formData.append("cloud_name","dvzjddjbu");
-     axios.post("https://api.cloudinary.com/v1_1/dvzjddjbu/image/upload",formData)
-     .then((res)=>setImage({...image,url:res.data.url,imageId:res.data.public_id})).catch((err)=>console.log(err))    
-    
+    }
+    // eslint-disable-next-line
+  }, [post, image.url])
+
+
+  const addPost = async (e) => {
+    if (selectedImage) {
+
+      if (selectedImage.type === 'image/jpeg' || selectedImage.type === 'image/png') {
+
+        e.preventDefault();
+        setLoading(true);
+        //for uploading image in cloudinary
+        const formData = new FormData();
+        formData.append("file", selectedImage);
+        formData.append("upload_preset", "v-connect");
+        formData.append("cloud_name", "dvzjddjbu");
+        axios.post("https://api.cloudinary.com/v1_1/dvzjddjbu/image/upload", formData)
+          .then((res) => setImage({ ...image, url: res.data.url, imageId: res.data.public_id })).catch((err) => console.log(err))
+      }
+
+      else {
+        setLoading(false);
+        dispatch({ type: 'SET_ALERT', payload: { msg: 'Choose appropriate file', severity: 'error', open: true } });
+      }
+
+
+    }
+    else {
+      dispatch({ type: 'SET_ALERT', payload: { msg: 'Choose photo to post', severity: 'error', open: true } });
+
+    }
+
   };
-  const editPost=()=>{ 
-      dispatch(updatePost(currentId, { ...postData, name: user.result.name }));
-      navigate('/');
+  const editPost = () => {
+    dispatch(updatePost(currentId, { ...postData, name: user.result.name }, setLoading));
+    navigate('/');
   }
-  
+
   const clear = () => {
     setCurrentId(null);
     setPostData({
@@ -66,7 +88,7 @@ const Form = ({ currentId, setCurrentId }) => {
       imageUrl: ''
     })
   }
-  
+
 
   if (!user?.result?.name) {
     return (
@@ -80,21 +102,29 @@ const Form = ({ currentId, setCurrentId }) => {
 
   return (
     <Container sx={customStyles.container}>
-
-      <Paper sx={customStyles.paper} elevation={6}  >
+      <Alert />
+      <Paper sx={customStyles.paper} elevation={5}  >
         <form style={customStyles.form} autoComplete='off' >
-          <Typography required sx={{ 'textAlign': 'center' }} variant='h5'>{currentId ? 'Edit your post' : 'Create your post'}</Typography>
-          <TextField  sx={customStyles.root} variant='outlined' name='title' label='Title' value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
+          <Typography required color='primary'sx={{ 'textAlign': 'center' }} variant='h5'>{currentId ? 'Edit your post' : 'Create your post'}</Typography>
+          <TextField sx={customStyles.root} variant='outlined' name='title' label='Title' value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
           <TextField sx={customStyles.root} variant='outlined' name='tags' label='Tags' value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
 
-           
-          <div style={customStyles.fileInput} >
-               <label htmlFor="imgFile">Select image :</label>
-               <input required type="file" id="imgFile" name='imageUrl' onChange={(e)=>setSelectedImage(e.target.files[0])}/>
-          </div>
-          <Button sx={customStyles.buttonSubmit}  variant='contained' color='primary' size='large' fullWidth onClick={currentId?editPost:addPost}>Submit</Button>
-          <Button variant='contained' onClick={clear} color='secondary' size='small' fullWidth>Clear</Button>
 
+          <div style={customStyles.fileInput} >
+            <input ref={ref} required style={{ display: 'none' }} type="file" id="imgFile" name='imageUrl' onChange={(e) => setSelectedImage(e.target.files[0])} />
+            {
+              !currentId ? 
+                <>
+              <Button sx={customStyles.addPhoto}  variant='contained' color='secondary' onClick={() => ref.current.click()}>choose photo</Button>
+                </>            
+                :
+                <>
+                </>
+            }
+          </div>
+          <LoadingButton loading={loading} loadingIndicator={currentId ? 'Updating...' : 'Posting...'} sx={customStyles.buttonSubmit} variant='contained' color='primary' size='large' fullWidth onClick={currentId ? editPost : addPost}>{currentId ? 'Update post' : 'Post'}</LoadingButton>
+          <Button variant='outlined' onClick={clear} color='primary' size='small' fullWidth>Clear</Button>
+    
         </form>
       </Paper>
     </Container>

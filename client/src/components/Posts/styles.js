@@ -1,6 +1,7 @@
  const customStyles={
     mainContainer: {
-       marginRight:'10px'
+       marginRight:'10px',
+       padding:'0'
         },
     smMargin: {
       margin: '12px'

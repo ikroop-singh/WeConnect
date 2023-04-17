@@ -11,29 +11,24 @@ export const getPosts = () => async (dispatch) => {
    }
 }
 
-export const getPostsBySearch=(searchQuery)=>async(dispatch)=>{
-   try{
-      const {data}=await api.fetchPostsBySearch(searchQuery);
-      dispatch({type:'FETCH_ALL_SEARCH' ,payload:data});
-   }catch(error){
-   console.log(error);
-   }
-}
-
-export const createPost = (post) => async (dispatch) => {
+export const createPost = (post,setLoading) => async (dispatch) => {
    try {
       const { data } = await api.createPosts(post);
-            dispatch({ type: 'CREATE', payload: data });
+      setLoading(false);
+      dispatch({ type: 'CREATE', payload: data });
    } catch (error) {
       console.log(error);
+      setLoading(false);
    }
 }
 
-export const updatePost = (id, post) => async (dispatch) => {
+export const updatePost = (id, post,setLoading) => async (dispatch) => {
    try {
       const { data } = await api.updatePost(id, post);
+      setLoading(false);
       dispatch({ type: 'UPDATE', payload: data });
    } catch (error) {
+      setLoading(false);
       console.log(error);
    }
 }

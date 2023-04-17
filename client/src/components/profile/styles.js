@@ -1,9 +1,10 @@
 const styles={ 
 
     paper:{
-      margin:'110px auto',
-       width:'85%',
-       borderRadius:'30px'
+      margin:'210px auto',
+       width:{md:'85%',sm:'92%',xs:'95%'},
+       borderRadius:'30px',
+
     },
     profilePic:{
         margin: 'auto',
@@ -20,13 +21,39 @@ const styles={
         }
     },
     profileName:{
-    position: 'relative',
-    bottom: '70px',
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
     },
+    profileHead:{
+        display:'flex',
+        justifyContent:'center',
+        flexDirection:'column',
+        position:'relative',
+        bottom:'70px',
+
+    },
+    
+    location:{
+        marginLeft:'5px'
+    },
+    editProfile:{
+
+        position: 'relative',
+        bottom: '124px', 
+        left: {lg:'58%',md:'65%',sm:'65%',xs:'68%'}, 
+        display: 'flex', 
+        alignItems: 'center', 
+        cursor: 'pointer' ,
+    },
+    
     buttons:{
         textAlign:'center',
         bottom: '45px',
         position:'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     followButton:{
         width:{
@@ -39,12 +66,6 @@ const styles={
             marginRight:'32px'
         }
     },
-    editButton:{
-        marginRight:'95px',
-       
-        },
-            
-    
    
     profileInfo:{
         display: 'flex',
@@ -61,7 +82,7 @@ const styles={
     },
     posts:{
         padding:'20px',
-        marginTop:'10px'
+        marginTop:'15px'
     },
     post:{
        maxWidth:'100%',

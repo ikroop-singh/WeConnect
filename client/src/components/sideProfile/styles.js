@@ -1,17 +1,4 @@
 export const customStyles={
-    grid_contain:{
-        // flexDirection:{xs:'column-reverse', sm:'column-reverse', lg:'row' }
-    },
-    container:{
-        marginTop:{
-            lg:'10.3%',
-            md:'11%',
-            sm:'15%',
-            xs:'27%'
-        },
-        padding:0
-       
-    },
    
     profilePic:{
         marginRight:'15px',
@@ -22,7 +9,16 @@ export const customStyles={
         height:'75px',
         width:'75px',
     },
-   
+    paper:{
+       '@media(max-width:965px)':{
+         display:'none',
+       },
+       
+        // display:{xs:'none',md:'none',lg:'block'},
+        width:{sm:'98%' , md:'90%'},
+        padding:"9px 15px 0 15px",
+        borderRadius: '15px',
+    },
     profileInfo:{
         display:'flex',
         justifyContent:'center',

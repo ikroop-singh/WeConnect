@@ -5,6 +5,7 @@ import { customStyles } from './styles';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useLocation ,useNavigate} from 'react-router-dom';
+import Search from '../search/search'
 
 const Navbar = () => {
     const location=useLocation();
@@ -19,31 +20,27 @@ const Navbar = () => {
     }
 
     useEffect(()=>{
-        // const token = user?.token;
-        // if(token){
-        //     const decodedData= decode(token);
-        //     if(decodedData.exp*10000 < new Date().getTime)
-        //         logout();
-        // }
         setUser(JSON.parse(localStorage.getItem('profile')));
     },[location]);
 
     return (
-        <Container>
+        <Container maxWidth='xl' sx={customStyles.container} >
 
-        <AppBar sx={customStyles.appBar} position='static' color="inherit">
-            <div style={customStyles.container}>
+        <AppBar sx={customStyles.appBar} component='nav' position='static' color="inherit">
+            <div style={customStyles.appbarInfo}>
                 <Typography component={Link} to='/' sx={customStyles.heading} variant="h3" align="center">WeConnect</Typography>
-                <img src={weconnect} alt="weConnect" height="30" width='30' style={customStyles.image} />
+                {/* <img src={weconnect} alt="weConnect" height="30" width='30' style={customStyles.image} /> */}
             </div>
             <Toolbar sx={customStyles.toolbar}>
                 {
-                user ?  <Button variant='contained'onClick={logout} color='warning'>Logout</Button>
+                user ?  <Button variant='contained' sx={customStyles.button} size='small' onClick={logout} color='warning'>Logout</Button>
                     :
                   (
-                    <Button component={Link} to='/auth' variant='contained' color='secondary'>Sign in</Button>
+                    <Button component={Link} to='/auth' size='small' variant='contained' color='secondary'>Sign in</Button>
                    )
                 }
+           <Search/>
+
                 
             </Toolbar>
         </AppBar>

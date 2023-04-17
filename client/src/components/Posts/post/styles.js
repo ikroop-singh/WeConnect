@@ -3,6 +3,7 @@ const customStyles={
       height: '100px',
       paddingTop: '56.25%',
     },
+
     card: {
       display: 'flex',
       flexDirection: 'column',
@@ -10,10 +11,11 @@ const customStyles={
       borderRadius: '15px',
       height: '100%',
       position: 'relative',
-      marginBottom:'40px'
+      marginBottom:'40px',
     },
     cardContent:{
-          padding:'15px 0 3px 16px'
+          padding:'15px 0 3px 16px',
+          
     },
 
     cardActions: {
@@ -25,7 +27,7 @@ const customStyles={
 
     userName: {
       padding: '5px 0px 0px 9px',
-      fontSize: '23px',
+      fontSize: {lg:'23px',md:'23px',sm:'21px',xs:'19px'},
       color: 'black',
       textDecoration:'none'
     },
@@ -58,6 +60,11 @@ const customStyles={
     },
     commentProfile:{
       padding:'10px 0'
+    },
+    postedBy:{
+       fontWeight: 'bold',
+       textDecoration:'none',
+       color:'black'
     },
     userProfile:{
       margin: '10px 0',
