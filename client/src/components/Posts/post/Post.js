@@ -13,7 +13,6 @@ import { deletePost, likePost, commentPost, deleteComment } from '../../../actio
 import { useNavigate, Link } from 'react-router-dom';
 import { Menu, MenuItem, Avatar } from '@mui/material';
 
-
 const Post = ({ post, setCurrentId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,8 +30,13 @@ const Post = ({ post, setCurrentId }) => {
   }
 
   const handleDelete = () => {
-    dispatch(deletePost(post._id));
+   if( window.confirm("Are you sure want to delete your postv! Changes will not revert")){
+
+     setOpen(false);
+     dispatch(deletePost(post._id));
+    }
     setOpen(false);
+    
   }
   const handleClose = () => {
     setOpen(false);

@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { Typography, AppBar, Toolbar, Button, Container } from '@mui/material';
-import weconnect from '../../image/weconnect.jpg';
+import weconnect from '../../image/weconnect.png';
 import { customStyles } from './styles';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -28,8 +28,8 @@ const Navbar = () => {
 
         <AppBar sx={customStyles.appBar} component='nav' position='static' color="inherit">
             <div style={customStyles.appbarInfo}>
+                <img src={weconnect} alt="weConnect" height="30" width='30' style={customStyles.image} />
                 <Typography component={Link} to='/' sx={customStyles.heading} variant="h3" align="center">WeConnect</Typography>
-                {/* <img src={weconnect} alt="weConnect" height="30" width='30' style={customStyles.image} /> */}
             </div>
             <Toolbar sx={customStyles.toolbar}>
                 {

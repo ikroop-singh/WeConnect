@@ -25,7 +25,7 @@ const Home = ({ setCurrentId }) => {
             <Container maxWidth='xl' sx={customStyles.container}>
                 <Grid container justifyContent='space-between' alignItems='stretch' sx={customStyles.grid_contain} spacing={3}>
                     <Grid item xs={9} md={3} >
-                        <SideProfile />
+                        <SideProfile setCurrentId={setCurrentId}/>
                     </Grid >
 
                     <Grid sx={{paddingLeft:"0px"}}item xs={12} md={6}>

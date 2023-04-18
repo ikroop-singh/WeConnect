@@ -6,7 +6,7 @@ import { customStyles } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const SideProfile = () => {
+const SideProfile = ({setCurrentId}) => {
     const [user,setUser]=useState(JSON.parse(localStorage.getItem('profile')));
     const navigate = useNavigate();
     useEffect(()=>{
@@ -36,7 +36,7 @@ const SideProfile = () => {
                     </Box>
                 </Box>
                 <Button sx={customStyles.viewButton} component={Link} to={'/profile/' + user?.result?._id} fullWidth variant='outlined'>View Your Profile</Button>
-                <Button onClick={() => { navigate('/addPost') }} sx={customStyles.addButton} fullWidth variant='contained'>
+                <Button onClick={() => { setCurrentId(null);navigate('/addPost') }} sx={customStyles.addButton} fullWidth variant='contained'>
                     <AddBoxIcon />
                     Create Post
                 </Button>

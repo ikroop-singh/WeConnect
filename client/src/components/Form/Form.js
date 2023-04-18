@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef ,useLocation} from 'react'
 import { Paper, Typography, TextField, Button, Container } from '@mui/material';
 import { customStyles } from './style';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import Alert from '../miscellaneous/Alert'
 
 
 const Form = ({ currentId, setCurrentId }) => {
+  console.log(process.env.REACT_APP_CLOUD_URL);
   const [loading, setLoading] = useState(false);
   const ref = useRef();
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ const Form = ({ currentId, setCurrentId }) => {
         formData.append("file", selectedImage);
         formData.append("upload_preset", "v-connect");
         formData.append("cloud_name", `${process.env.REACT_APP_CLOUD_NAME}`);
-        axios.post("https://api.cloudinary.com/v1_1/dvzjddjbu/image/upload", formData)
+        axios.post(`${process.env.REACT_APP_CLOUD_URL}`, formData)
           .then((res) => setImage({ ...image, url: res.data.url, imageId: res.data.public_id })).catch((err) => console.log(err))
       }
 
