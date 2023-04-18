@@ -10,7 +10,6 @@ import Alert from '../miscellaneous/Alert'
 
 
 const Form = ({ currentId, setCurrentId }) => {
-  console.log(process.env.REACT_APP_CLOUD_URL);
   const [loading, setLoading] = useState(false);
   const ref = useRef();
   const navigate = useNavigate();
