@@ -8,7 +8,7 @@ import { Paper } from '@mui/material';
 import {customStyles} from './styles';
 import { useNavigate,Link } from 'react-router-dom';
 
-const BottomNavbar = () => {
+const BottomNavbar = ({setCurrentId}) => {
     const navigate = useNavigate();
     const [value,setValue]=useState('posts');
     const user=JSON.parse(localStorage.getItem('profile'));
@@ -24,7 +24,7 @@ const BottomNavbar = () => {
                  icon={<HomeIcon/>}
                 />
                 <BottomNavigationAction
-                    onClick={()=>navigate('/addPost')}
+                    onClick={()=>{setCurrentId(null);navigate('/addPost')}}
                     label='add'
                     value='add'
                     icon={<AddBoxIcon/>}

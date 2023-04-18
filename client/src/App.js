@@ -38,7 +38,7 @@ const App = () => {
                     localUser ?
                     (
                         <>
-                        <BottomNavbar/>
+                        <BottomNavbar setCurrentId={setCurrentId}/>
                         </>
                     )
                         :
