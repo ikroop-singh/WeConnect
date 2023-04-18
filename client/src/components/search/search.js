@@ -28,14 +28,14 @@ const SideDrawer = () => {
             <Box sx={styles.box}>
                 <Tooltip title='search' arrow>
                     <IconButton onClick={() => setDrawerOpen(true)}>
-                        <SearchIcon />
-                        <Typography sx={styles.search} >search</Typography>
+                        <SearchIcon color='primary'/>
+                        <Typography color= 'primary'sx={styles.search} >search</Typography>
                     </IconButton>
                 </Tooltip>                
             </Box>
             <Drawer anchor='left' open={drawerOpen} onClose={() => {setDrawerOpen(false);dispatch({type:'CLEAR_SEARCH'})}}>
                 <Box sx={{ margin: '15px' }}>
-                    <Typography align='center' variant='h6'>Search users</Typography>
+                    <Typography align='center' variant='h6' color='primary'>Search users</Typography>
                     <Box sx={{ display: "flex", marginTop: '8px' }}>
                         <TextField size='small' variant='outlined' label='search' onChange={(e) =>{ setSearch(e.target.value) ; dispatch(searchUsers(search))}} />
                         <Button size='small' onClick={searchHandler}>go</Button>
